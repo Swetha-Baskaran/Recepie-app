@@ -2,6 +2,9 @@ import React from "react";
 
 import "./style.css";
 
+let SpiceValue = localStorage.getItem("Spices").split(",")
+let IngredientValue = localStorage.getItem("Ingredients").split(",")
+
 export default function RecepieList (){
     return(
         <>
@@ -13,24 +16,26 @@ export default function RecepieList (){
                   </div>
               </div>
               <div>
-                  <h2 className="p-3 my-2 text-2xl bg-yellow-200">Incredients</h2>
-                  <ol className="p-3 my-3 bg-gray-100">
-                      <li className="p-2 my-2 bg-white">bread</li>
-                      <li className="p-2 my-2 bg-white">bread</li>
-                      <li className="p-2 my-2 bg-white">bread</li>
-                      <li className="p-2 my-2 bg-white">bread</li>
-                      <li className="p-2 my-2 bg-white">bread</li>
-                  </ol>
-              </div>
-              <div>
-                  <h2 className="p-3 my-2 text-2xl bg-yellow-200">Spices</h2>
-                  <ol className="p-3 my-3 bg-gray-100">
-                      <li className="p-2 my-2 bg-white">pepper</li>
-                      <li className="p-2 my-2 bg-white">pepper</li>
-                      <li className="p-2 my-2 bg-white">pepper</li>
-                      <li className="p-2 my-2 bg-white">pepper</li>
-                      <li className="p-2 my-2 bg-white">pepper</li>
-                  </ol>
+                  {
+                      [{name: "Ingredients", value: IngredientValue}, {name: "Spices", value: SpiceValue}].map((event, index)=>{
+                          return (
+                              <>
+                              <div key={event.name}>
+                                 <h2 className="p-3 my-2 text-2xl bg-yellow-200">{event.name}</h2>
+                                 <ol className="p-3 my-3 bg-gray-100">
+                                 {
+                                     event.value.map((e, index)=>{
+                                         return (
+                                             <li key={index}>{e}</li>
+                                         )
+                                     })
+                                 }
+                                 </ol>
+                              </div>
+                            </>
+                          )
+                      })
+                  }
               </div>
           </div>
         </>

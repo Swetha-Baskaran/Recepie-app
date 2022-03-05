@@ -8,7 +8,7 @@ import "./style.css";
 
 const Products = [IngredientList, SpicesList];
 
-const PathNames = ["Ingredients", "Spices"]
+const PathNames = ["Ingredients", "Spices"];
 
 export default function SideNav({ value }){
     return (

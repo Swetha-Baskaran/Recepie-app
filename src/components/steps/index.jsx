@@ -4,6 +4,8 @@ import SideNav from "../sideNav";
 
 import "./style.css"
 
+import {IngredientList} from "../data/incredients.js"
+import {SpicesList} from "../data/spices.js"
 
 export default function StepsHold({ value }){
 
@@ -11,7 +13,12 @@ export default function StepsHold({ value }){
   let [Spi, AddSpi] = useState([])
   
   let addItem = (e) => {
-      AddIng([...Ing, e])
+      if(IngredientList.includes(e)){
+          AddIng([...Ing, e])
+      }
+      else{
+          AddSpi([...Spi, e])
+      }
   }
   
 
@@ -47,7 +54,7 @@ export default function StepsHold({ value }){
                        </button>
                  }
                </div>
-               
+
                <div className="bg-gray-300 p-3 shadow-2xl my-5">Recepie Name</div>
 
                <div className="box py-6 flex flex-col items-center">
