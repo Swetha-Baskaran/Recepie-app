@@ -5,6 +5,7 @@ import SideNav from "../sideNav";
 import "./style.css"
 
 import {IngredientList} from "../data/incredients.js"
+import Items from "./items";
 
 function getOccurrence(myArray, value) {
   var count = 0;
@@ -12,13 +13,13 @@ function getOccurrence(myArray, value) {
   return count;
 }
 
-export default function StepsHold({ value }){
+export default function StepsHold({ value, name }){
 
-  // localStorage.setItem("Ingredients", "")
-  // localStorage.setItem("Spices", "")
+  let I = JSON.parse(localStorage.getItem("Ingredients"));
+  let S = JSON.parse(localStorage.getItem("Spices"));
 
-  let [Ing, AddIng] = useState([])
-  let [Spi, AddSpi] = useState([])
+  let [Ing, AddIng] = useState((I) ? I : [])
+  let [Spi, AddSpi] = useState((S) ? S : [])
   
   let addItem = (event) => {
       if(IngredientList.includes(event)){
@@ -34,8 +35,6 @@ export default function StepsHold({ value }){
         else{
           AddIng([...Ing, {name: event, count: 1}])
         }
-//  console.log([...JSON.parse(localStorage.getItem("Ingredients"))])
-            
 
       }
       else{
@@ -79,66 +78,31 @@ export default function StepsHold({ value }){
 
 
   useEffect(()=>{
-    localStorage.removeItem("Ingredients")
     localStorage.setItem("Ingredients", JSON.stringify(Ing))
   }, [Ing])
 
   useEffect(()=>{
-    localStorage.removeItem("Spices")
     localStorage.setItem("Spices", JSON.stringify(Spi))
   }, [Spi])
 
     return(
         <>
           <div className="block sm:flex">
-              {/* ingredients or spices list */}
-             <div className="nav-hold bg-gray-200 p-10 ">
-               <SideNav value={addItem} />
-             </div>
+              <SideNav value={addItem} />
 
-             <div className="getValues p-6 grow">
-               <div className="flex justify-items-stretch">
-                 {/* buttons */}
-                 {
-                   (value === 0) ?
-                       <button className="justify-self-end">
-                          <Link to="/Steps/Spices">next</Link>  
-                       </button> 
-                       : 
-                       <button className="justify-self-end">
-                          <Link to="/Steps/Ingredients">back</Link>    
-                       </button>
-                 }
-               </div>
+              <div className="getValues p-6 grow">
 
-               <div className="bg-gray-300 p-3 shadow-2xl my-5">Recepie Name</div>
+                  <div className="flex justify-between">
+                          <button className="justify-self-end">
+                             <Link to="/Steps/Ingredients">back</Link>    
+                          </button>
+                          <button className="justify-self-end">
+                             <Link to="/Steps/Spices">next</Link>
+                          </button> 
+                  </div>
 
-               <div className="box py-6 flex flex-col items-center">
-                    {/* items must be added here */}
-                    <Routes>
-                      {
-                        ["Ingredients", "Spices"].map((e, ind)=>{
-                           return (
-                             <Route path={"/"+e}
-                               element={
-                                 ((ind === 0 ? Ing : Spi)).map((e, index)=>{
-                                 return (
-                                   <div className="element flex" key={index}>
-                                     <div className="name m-2 w-96 px-5 py-1 bg-yellow-100">{e.name}</div>  
-                                     <div className="plus m-2 p-1 px-3 bg-green-100" onClick={()=>{Increment(index, ind)}} >+</div>
-                                     <div className="count m-2 p-1 px-3 bg-gray-100">{e.count}</div>
-                                     <div className="minus m-2 p-1 px-3 bg-red-100" onClick={()=>{Decrement(index, ind)}} >-</div>
-                                  </div>
-                                 )
-                                })
-                              }
-                             />
-                           )
-                        })
-                      }
-                    </Routes>
-               </div>
-                
+               <div className="bg-gray-300 p-3 shadow-2xl my-5">{name}</div>
+               <Items Ing={Ing} Spi={Spi} Increment={Increment} Decrement={Decrement} />
 
              </div>
           </div>

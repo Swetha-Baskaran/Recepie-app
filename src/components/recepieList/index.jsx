@@ -5,6 +5,10 @@ import "./style.css";
 let SpiceValue = JSON.parse(localStorage.getItem("Spices"))
 let IngredientValue = JSON.parse(localStorage.getItem("Ingredients"))
 
+ let Save = () => {
+     
+ }
+
 export default function RecepieList (){
     return(
         <>
@@ -12,7 +16,7 @@ export default function RecepieList (){
               <div>
                   <div className="text-2xl md:text-3xl bg-gray-300 p-5 my-4 uppercase text-center flex justify-between">
                      <div >Final Recepie - Spicy burger</div>
-                     <button>Save</button>
+                     <button className="bg-cyan-500 shadow-lg shadow-cyan-500/50 text-white rounded-full py-2 px-6" onClick={()=>{Save()}}>Save</button>
                   </div>
                   <div className="bg-red-300 h-96 mb-4">
                     <img src="/" alt="final image of the recepie created" />
@@ -24,12 +28,19 @@ export default function RecepieList (){
                           return (
                               <>
                               <div key={event.name}>
-                                    <h2 className="p-3 my-2 text-2xl bg-yellow-200">{event.name}</h2>
+                                    <div className="p-3 my-2 text-2xl bg-yellow-200 flex justify-between">
+                                        <h2>{event.name} Used</h2>
+                                        <h2>Quantity</h2>
+                                    </div>
+
                                  <ol className="p-3 my-3 bg-gray-100">
                                  {
                                      event.value.map((e, index)=>{
                                          return (
-                                             <li key={index}>{e.name}</li>
+                                             <li key={index} className="flex justify-between">
+                                                <div>{e.name}</div>    
+                                                <div>{e.count}</div>
+                                             </li>
                                          )
                                      })
                                  }

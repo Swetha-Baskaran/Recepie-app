@@ -13,6 +13,7 @@ const PathNames = ["Ingredients", "Spices"];
 export default function SideNav({ value }){
     return (
         <>
+        <div className="nav-hold bg-gray-200 p-10 ">
           <div className="items">
             <Routes>
             {
@@ -36,6 +37,7 @@ export default function SideNav({ value }){
             }
             </Routes>
           </div>
+        </div>
         </>
     )
 }
