@@ -29,6 +29,7 @@ export default function StepsHold({ value, name }){
                e.count += 1
                AddIng([...Ing])
             }
+            return ""
          })
         }
         else{
@@ -44,7 +45,9 @@ export default function StepsHold({ value, name }){
                e.count += 1
                AddSpi([...Spi])
             }
+            return ""
          })
+         
         }
         else{
           AddSpi([...Spi, {name: event, count: 1}])
