@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link } from "react-router-dom";
 import SideNav from "../sideNav";
 
 import "./style.css"
@@ -9,7 +9,7 @@ import Items from "./items";
 
 function getOccurrence(myArray, value) {
   var count = 0;
-  myArray .forEach((val) => (val.name === value && count++));
+  myArray.forEach((val) => (val.name === value && count++));
   return count;
 }
 
