@@ -1,6 +1,5 @@
 import React from "react";
 
-import "./style.css";
 
 let SpiceValue = JSON.parse(localStorage.getItem("Spices"))
 let IngredientValue = JSON.parse(localStorage.getItem("Ingredients"))
@@ -19,7 +18,7 @@ export default function RecepieList (){
                      <button className="bg-cyan-500 shadow-lg shadow-cyan-500/50 text-white rounded-full py-2 px-6" onClick={()=>{Save()}}>Save</button>
                   </div>
                   <div className="bg-red-300 h-96 mb-4">
-                    <img src="/" alt="final image of the recepie created" />
+                    {/* <img src="" alt="final image of the recepie created" /> */}
                   </div>
               </div>
               <div>

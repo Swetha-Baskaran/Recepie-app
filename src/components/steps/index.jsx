@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SideNav from "../sideNav";
 
-import "./style.css"
 
 import {IngredientList} from "../data/incredients.js"
 import Items from "./items";
