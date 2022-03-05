@@ -9,13 +9,12 @@ import StepsHold from "./steps";
 export default function Main(){
     return (
         <>
-          <div>React Recepie App</div>
-
-          <Routes>
-            <Route to="/" element={<Home />} />
-            <Route to="/" element={<StepsHold />} />
-            <Route to="/" element={<RecepieList />}/>
-          </Routes>
+             <Routes>
+               <Route exact path="/" element={<Home />} />
+               <Route exact path="/Steps/*" element={<StepsHold value={0} />} />
+               <Route exact path="/Steps/*" element={<StepsHold value={1} />} />
+               <Route exact path="/RecepieList" element={<RecepieList />}/>
+             </Routes>
 
         </>
     )

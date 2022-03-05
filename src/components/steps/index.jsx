@@ -1,21 +1,82 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, Route, Routes } from "react-router-dom";
 import SideNav from "../sideNav";
-import Ingredients from "./ingredients";
-import Spices from "./spices";
 
-export default function StepsHold(){
+import "./style.css"
+
+
+export default function StepsHold({ value }){
+
+  let [Ing, AddIng] = useState([])
+  let [Spi, AddSpi] = useState([])
+  
+  let addItem = (e) => {
+      AddIng([...Ing, e])
+  }
+  
+
+  useEffect(()=>{
+    localStorage.removeItem("Ingredients")
+    localStorage.setItem("Ingredients", Ing)
+  }, [Ing])
+
+  useEffect(()=>{
+    localStorage.removeItem("Spices")
+    localStorage.setItem("Spices", Spi)
+  }, [Spi])
+
     return(
         <>
-          <div className="block lg:flex">
-             <div className="bg-gray-200">
-               <SideNav />
+          <div className="block sm:flex">
+              {/* ingredients or spices list */}
+             <div className="nav-hold bg-gray-200 p-10 ">
+               <SideNav value={addItem} />
              </div>
-             <div>
-                <Routes>
-                  <Route to="/Step1" element={<Ingredients />}></Route>
-                  <Route to="/Step2" element={<Spices />}></Route>
-                </Routes>
+
+             <div className="getValues p-6 grow">
+               <div className="flex justify-items-stretch">
+                 {/* buttons */}
+                 {
+                   (value === 0) ?
+                       <button className="justify-self-end">
+                          <Link to="/Steps/Spices">next</Link>  
+                       </button> 
+                       : 
+                       <button className="justify-self-end">
+                          <Link to="/Steps/Ingredients">back</Link>    
+                       </button>
+                 }
+               </div>
+               
+               <div className="bg-gray-300 p-3 shadow-2xl my-5">Recepie Name</div>
+
+               <div className="box py-6 flex flex-col items-center">
+                    {/* items must be added here */}
+                    <Routes>
+                      {
+                        ["Ingredients", "Spices"].map((e, index)=>{
+                           return (
+                             <Route path={"/"+e}
+                               element={
+                                 ((index === 0 ? Ing : Spi)).map((e, index)=>{
+                                 return (
+                                   <div className="element flex" key={index}>
+                                     <div className="name m-2 w-96 px-5 py-1 bg-yellow-100">{e}</div>  
+                                     <div className="plus m-2 p-1 px-3 bg-green-100">+</div>
+                                     <div className="count m-2 p-1 px-3 bg-gray-100">1</div>
+                                     <div className="minus m-2 p-1 px-3 bg-red-100">-</div>
+                                 </div>
+                                 )
+                                })
+                              }
+                             />
+                           )
+                        })
+                      }
+                    </Routes>
+               </div>
+                
+
              </div>
           </div>
         </>

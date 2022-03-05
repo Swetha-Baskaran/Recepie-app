@@ -1,0 +1,14 @@
+li{
+    list-style-type: none;
+
+}
+
+.items{
+    height: 100%;
+    overflow-y: auto;
+}
+
+.topic{
+    font-size: 23px;
+}
+
