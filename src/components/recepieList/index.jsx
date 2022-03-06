@@ -1,11 +1,43 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-
-
 export default function RecepieList (){
-
     let name = localStorage.getItem("name")
+
+    var options = {
+        method: 'GET',
+        url: 'https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI',
+        params: {q: 'food', pageNumber: '1', pageSize: '20', autoCorrect: 'true'},
+        headers: {
+          'x-rapidapi-host': 'contextualwebsearch-websearch-v1.p.rapidapi.com',
+          'x-rapidapi-key': 'd47fb14bfbmsh8eae95f7f8f5e65p12d02ajsnb1e43a9a494a'
+        }
+      };
+
+
+    let [imgs, SetImg] = useState("")
+
+    let fun = async () => {
+        await axios.request(options).then(function (response) {
+            console.log(response.data.value[0].url);
+            SetImg(response.data.value[0].url)
+        }).catch(function (error) {
+            console.error(error);
+        });
+    }
+    
+    fun()
+
+// useEffect(()=>{
+//     axios.request(options).then(function (response) {
+//         console.log(response.data.value[0].url);
+//         SetImg(response.data.value[0].url)
+//     }).catch(function (error) {
+//         console.error(error);
+//     });
+// }, [])
+
 
     let SpiceValue = JSON.parse(localStorage.getItem("Spices"))
     let IngredientValue = JSON.parse(localStorage.getItem("Ingredients"))
@@ -13,16 +45,16 @@ export default function RecepieList (){
 
     return(
         <>
-          <div className="mx-9 py-0">
+          <div className="list mx-9 py-0">
               <div>
                   <div className="text-2xl md:text-3xl bg-gray-300 p-5 my-4 uppercase text-center flex justify-between">
                      <div >Final Recepie - {name}</div>
-                     <button className="bg-cyan-500 shadow-lg shadow-cyan-500/50 text-white rounded-full py-2 px-6 text-2xl" >
+                     <button className="bg-cyan-600 shadow-cyan-500/50 text-white rounded py-2 px-6 text-2xl" >
                         <Link to="/">back to home</Link>
                      </button>
                   </div>
-                  <div className="bg-red-300 h-96 mb-4">
-                    <img src="" alt="final image of the recepie created" />
+                  <div className="bg-red-300 mb-4">
+                    <img src={imgs} className="h-96 w-full" alt="" />
                   </div>
               </div>
               <div>
