@@ -94,17 +94,17 @@ export default function StepsHold({ value, name }){
 
               <div className="getValues p-6 grow">
 
+                  <div className="text-teal-700 my-5">Recepie Book</div>
                   <div className="flex justify-between">
-                          <button className="justify-self-end">
+                          <button className="bg-blue-500 capitalize text-white px-7 py-1 shadow-lg rounded">
                              <Link to="/Steps/Ingredients">back</Link>    
                           </button>
-                          <button className="justify-self-end">
+                          <button className="bg-blue-500 capitalize text-white px-7 py-1 shadow-lg rounded">
                              <Link to="/Steps/Spices">next</Link>
                           </button> 
                   </div>
 
-               <div className="bg-gray-300 p-3 shadow-2xl my-5">{name}</div>
-               <Items Ing={Ing} Spi={Spi} Increment={Increment} Decrement={Decrement} />
+               <Items Ing={Ing} Spi={Spi} Increment={Increment} Decrement={Decrement} name={name} />
 
              </div>
           </div>

@@ -15,7 +15,7 @@ export default function RecepieList (){
               <div>
                   <div className="text-2xl md:text-3xl bg-gray-300 p-5 my-4 uppercase text-center flex justify-between">
                      <div >Final Recepie - Spicy burger</div>
-                     <button className="bg-cyan-500 shadow-lg shadow-cyan-500/50 text-white rounded-full py-2 px-6" onClick={()=>{Save()}}>Save</button>
+                     <button className="bg-cyan-500 shadow-lg shadow-cyan-500/50 text-white rounded-full py-2 px-6" onClick={()=>{Save()}}>back to home</button>
                   </div>
                   <div className="bg-red-300 h-96 mb-4">
                     {/* <img src="" alt="final image of the recepie created" /> */}

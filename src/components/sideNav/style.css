@@ -12,3 +12,6 @@ li{
     font-size: 23px;
 }
 
+.nav-hold{
+    height: 100vh;
+}
