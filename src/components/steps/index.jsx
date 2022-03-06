@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import SideNav from "../sideNav";
 
 
@@ -94,16 +93,8 @@ export default function StepsHold({ value, name }){
 
               <div className="getValues p-6 grow">
 
-                  <div className="text-teal-700 my-5">Recepie Book</div>
-                  <div className="flex justify-between">
-                          <button className="bg-blue-500 capitalize text-white px-7 py-1 shadow-lg rounded">
-                             <Link to="/Steps/Ingredients">back</Link>    
-                          </button>
-                          <button className="bg-blue-500 capitalize text-white px-7 py-1 shadow-lg rounded">
-                             <Link to="/Steps/Spices">next</Link>
-                          </button> 
-                  </div>
-
+               <div className="text-teal-700 my-5">Recepie Book</div>
+                  
                <Items Ing={Ing} Spi={Spi} Increment={Increment} Decrement={Decrement} name={name} />
 
              </div>
