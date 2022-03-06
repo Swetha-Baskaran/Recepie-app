@@ -5,43 +5,26 @@ import { Link } from "react-router-dom";
 export default function RecepieList (){
     let name = localStorage.getItem("name")
 
+
+    let SpiceValue = JSON.parse(localStorage.getItem("Spices"))
+    let IngredientValue = JSON.parse(localStorage.getItem("Ingredients"))
+    
     var options = {
         method: 'GET',
         url: 'https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI',
-        params: {q: 'food', pageNumber: '1', pageSize: '20', autoCorrect: 'true'},
+        params: {q: 'taylor swift', pageNumber: '1', pageSize: '10', autoCorrect: 'true'},
         headers: {
           'x-rapidapi-host': 'contextualwebsearch-websearch-v1.p.rapidapi.com',
           'x-rapidapi-key': 'd47fb14bfbmsh8eae95f7f8f5e65p12d02ajsnb1e43a9a494a'
         }
       };
+      
+      axios.request(options).then(function (response) {
+          console.log(response.data);
+      }).catch(function (error) {
+          console.error(error);
+      });
 
-
-    let [imgs, SetImg] = useState("")
-
-    let fun = async () => {
-        await axios.request(options).then(function (response) {
-            console.log(response.data.value[0].url);
-            SetImg(response.data.value[0].url)
-        }).catch(function (error) {
-            console.error(error);
-        });
-    }
-    
-    fun()
-
-// useEffect(()=>{
-//     axios.request(options).then(function (response) {
-//         console.log(response.data.value[0].url);
-//         SetImg(response.data.value[0].url)
-//     }).catch(function (error) {
-//         console.error(error);
-//     });
-// }, [])
-
-
-    let SpiceValue = JSON.parse(localStorage.getItem("Spices"))
-    let IngredientValue = JSON.parse(localStorage.getItem("Ingredients"))
-    
 
     return(
         <>
@@ -54,7 +37,7 @@ export default function RecepieList (){
                      </button>
                   </div>
                   <div className="bg-red-300 mb-4">
-                    <img src={imgs} className="h-96 w-full" alt="" />
+                    <img src="" className="h-96 w-full" alt="" />
                   </div>
               </div>
               <div>
